@@ -1,0 +1,11 @@
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\bin\Debug\netcoreapp2.1\MovieBackend.deps.json
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\bin\Debug\netcoreapp2.1\MovieBackend.runtimeconfig.json
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\bin\Debug\netcoreapp2.1\MovieBackend.runtimeconfig.dev.json
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\bin\Debug\netcoreapp2.1\MovieBackend.dll
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.csprojAssemblyReference.cache
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.RazorAssemblyInfo.cache
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.RazorAssemblyInfo.cs
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.AssemblyInfoInputs.cache
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.AssemblyInfo.cs
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.RazorTargetAssemblyInfo.cache
