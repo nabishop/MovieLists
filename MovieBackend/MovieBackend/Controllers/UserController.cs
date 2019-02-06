@@ -59,9 +59,17 @@ namespace MovieBackend.Controllers
             using (MySqlConnection conn = new MySqlConnection(_context.ConnectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("DELETE FROM users where user_id=" + id, conn);
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "DELETE FROM user where user_id=" + id;
+
                 cmd.ExecuteNonQuery();
                 conn.Close();
+                if (conn != null)
+                {
+                    conn.Close();
+                }
             }
         }
 
