@@ -47,7 +47,6 @@ namespace MovieBackend.Contexts
                             Title = reader["title"].ToString(),
                             Description = reader["description"].ToString(),
                             ReleaseDate = reader["release_date"].ToString(),
-                            Watched = Convert.ToBoolean(reader["watched"]),
                             Rating = Convert.ToDouble(reader["rating"])
                         });
                     }
@@ -82,7 +81,6 @@ namespace MovieBackend.Contexts
                             Title = reader["title"].ToString(),
                             Description = reader["description"].ToString(),
                             ReleaseDate = reader["release_date"].ToString(),
-                            Watched = Convert.ToBoolean(reader["watched"]),
                             Rating = Convert.ToDouble(reader["rating"])
                         };
                         if (conn != null)
@@ -107,13 +105,12 @@ namespace MovieBackend.Contexts
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
 
-                cmd.CommandText = "INSERT INTO movie(title, description, release_date, watched, rating) VALUES(@Title, @Desc, @Date, @Watched, @Rating)";
+                cmd.CommandText = "INSERT INTO movie(title, description, release_date, rating) VALUES(@Title, @Desc, @Date, @Rating)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@Title", movie.Title);
                 cmd.Parameters.AddWithValue("@Desc", movie.Description);
                 cmd.Parameters.AddWithValue("@Date", movie.ReleaseDate);
-                cmd.Parameters.AddWithValue("@Watched", movie.Watched);
                 cmd.Parameters.AddWithValue("@Rating", movie.Rating);
 
                 cmd.ExecuteNonQuery();
@@ -139,11 +136,6 @@ namespace MovieBackend.Contexts
                 // change rating
                 cmd.CommandText = "UPDATE movie SET rating=@NewRating WHERE movie_id=" + id;
                 cmd.Parameters.AddWithValue("@NewRating", rating);
-                cmd.ExecuteNonQuery();
-
-                // update that the movie has been viewed
-                cmd.CommandText = "UPDATE movie SET watched=@NewWatched WHERE movie_id=" + id;
-                cmd.Parameters.AddWithValue("@NewRating", 1);
                 cmd.ExecuteNonQuery();
 
                 if (conn != null)

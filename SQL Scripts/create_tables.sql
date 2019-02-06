@@ -20,8 +20,7 @@ DROP TABLE IF EXISTS movie;
 CREATE TABLE IF NOT EXISTS movie(
     movie_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title VARCHAR(30) NOT NULL,
-    description BLOB NOT NULL,
+    description VARCHAR(200) NOT NULL,
     release_date VARCHAR(10) NOT NULL,
-    watched BIT not null,
-    rating FLOAT not null
+    rating FLOAT DEFAULT NULL
 );
