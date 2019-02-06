@@ -9,7 +9,7 @@ namespace MovieBackend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserItemContext _context;
+        private readonly UserContext _context;
 
         // GET: api/User
         [HttpGet]
@@ -27,14 +27,9 @@ namespace MovieBackend.Controllers
 
         // POST: api/user
         [HttpPost]
-        public void Post(UserItem userItem)
+        public void Post([FromBody] UserItem userItem)
         {
-            using (MySqlConnection conn = new MySqlConnection(_context.ConnectionString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO student VALUES(" + userItem.Name + ", " + userItem.Name, conn);
-                cmd.ExecuteNonQuery();
-            }
+            _context.postUser(userItem);
         }
 
         // PUT: api/user/5
@@ -44,7 +39,7 @@ namespace MovieBackend.Controllers
             using (MySqlConnection conn = new MySqlConnection(_context.ConnectionString))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("UPDATE users SET password=" + userItem.Password + " WHERE user_id=" + userItem.Id, conn);
+                MySqlCommand cmd = new MySqlCommand("UPDATE user SET password=" + userItem.Password + " WHERE user_id=" + userItem.Id, conn);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -61,7 +56,7 @@ namespace MovieBackend.Controllers
             }
         }
 
-        public UserController(UserItemContext context)
+        public UserController(UserContext context)
         {
             _context = context;
         }

@@ -30,7 +30,7 @@ namespace MovieBackend
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors();
 
-            services.Add(new ServiceDescriptor(typeof(UserItemContext), new UserItemContext(Configuration.GetConnectionString("DefaultConnection"))));
+            services.Add(new ServiceDescriptor(typeof(UserContext), new UserContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(ListItemContext), new ListItemContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(MovieItemContext), new MovieItemContext(Configuration.GetConnectionString("DefaultConnection"))));
 
