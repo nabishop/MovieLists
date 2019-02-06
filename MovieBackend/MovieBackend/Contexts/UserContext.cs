@@ -7,6 +7,7 @@ namespace MovieBackend.Models
 {
     public class UserContext : DbContext
     {
+        // context helper methods
         public string ConnectionString { get; set; }
 
         public DbSet<UserItem> UserItems { get; set; }
@@ -21,13 +22,17 @@ namespace MovieBackend.Models
             return new MySqlConnection(ConnectionString);
         }
 
+
+        // api helper methods
+
+        // get
         public List<UserItem> GetUsers()
         {
             List<UserItem> list = new List<UserItem>();
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from user", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM user", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -41,11 +46,17 @@ namespace MovieBackend.Models
                         });
                     }
                 }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
             }
+
             return list;
 
         }
 
+        // get + id
         public UserItem GetUserWithId(int id)
         {
             UserItem user;
@@ -64,6 +75,11 @@ namespace MovieBackend.Models
                             Name = reader["user_name"].ToString(),
                             Password = reader["user_password"].ToString()
                         };
+                        if (conn != null)
+                        {
+                            conn.Close();
+                        }
+
                         return user;
                     }
                 }
@@ -72,6 +88,7 @@ namespace MovieBackend.Models
 
         }
 
+        // post
         public void postUser(UserItem userItem)
         {
             using (MySqlConnection conn = GetConnection())
@@ -95,5 +112,7 @@ namespace MovieBackend.Models
                 }
             }
         }
+
+
     }
 }
