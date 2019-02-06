@@ -8,7 +8,7 @@ namespace MovieBackend.Contexts
     {
         public string ConnectionString { get; set; }
 
-        public DbSet<ListItem> UserItems { get; set; }
+        public DbSet<ListItem> ListItems { get; set; }
 
         public ListItemContext(string connectionString)
         {

@@ -120,7 +120,7 @@ namespace MovieBackend.Models
 
 
         // set a new password for a user
-        public void putNewPassword(int id, NewPassword password)
+        public void putNewPassword(int id, string password)
         {
             using (MySqlConnection conn = GetConnection())
             {
@@ -128,7 +128,7 @@ namespace MovieBackend.Models
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandText = "UPDATE user SET user_password=@NewPassword WHERE user_id=" + id;
-                cmd.Parameters.AddWithValue("@NewPassword", password.UpdatedPassword);
+                cmd.Parameters.AddWithValue("@NewPassword", password);
 
                 cmd.ExecuteNonQuery();
                 if (conn != null)

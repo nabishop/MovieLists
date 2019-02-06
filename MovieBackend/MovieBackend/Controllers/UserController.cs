@@ -34,7 +34,7 @@ namespace MovieBackend.Controllers
 
         // PUT: api/user/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] NewPassword password)
+        public void Put(int id, [FromBody] string password)
         {
             _context.putNewPassword(id, password);
         }
@@ -43,21 +43,7 @@ namespace MovieBackend.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            using (MySqlConnection conn = new MySqlConnection(_context.ConnectionString))
-            {
-                conn.Open();
-
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "DELETE FROM user where user_id=" + id;
-
-                cmd.ExecuteNonQuery();
-                conn.Close();
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
+            _context.deleteUser(id);
         }
 
         public UserController(UserContext context)
