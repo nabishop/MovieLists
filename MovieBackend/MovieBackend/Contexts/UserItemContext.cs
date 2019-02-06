@@ -27,7 +27,7 @@ namespace MovieBackend.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from users", conn);
+                MySqlCommand cmd = new MySqlCommand("select * from user", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -35,9 +35,9 @@ namespace MovieBackend.Models
                     {
                         list.Add(new UserItem()
                         {
-                            Name = reader["name"].ToString(),
-                            Password = reader["password"].ToString(),
-                            Id = Convert.ToInt32(reader["user_id"])
+                            Id = Convert.ToInt32(reader["user_id"]),
+                            Name = reader["user_name"].ToString(),
+                            Password = reader["user_password"].ToString(),
                         });
                     }
                 }
@@ -51,7 +51,7 @@ namespace MovieBackend.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT user_id FROM users WHERE user_id=" + id, conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT user_id FROM user WHERE user_id=" + id, conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -59,9 +59,9 @@ namespace MovieBackend.Models
                     {
                         user = new UserItem()
                         {
-                            Name = reader["name"].ToString(),
-                            Password = reader["password"].ToString(),
-                            Id = Convert.ToInt32(reader["user_id"])
+                            Id = Convert.ToInt32(reader["user_id"]),
+                            Name = reader["user_name"].ToString(),
+                            Password = reader["user_password"].ToString()
                         };
                         return user;
                     }

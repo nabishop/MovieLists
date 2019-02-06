@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MovieBackend.Contexts;
+using MovieBackend.Models;
 
 namespace MovieBackend
 {
@@ -27,6 +29,10 @@ namespace MovieBackend
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors();
+
+            services.Add(new ServiceDescriptor(typeof(UserItemContext), new UserItemContext(Configuration.GetConnectionString("DefaultConnection"))));
+            services.Add(new ServiceDescriptor(typeof(ListItemContext), new ListItemContext(Configuration.GetConnectionString("DefaultConnection"))));
+            services.Add(new ServiceDescriptor(typeof(MovieItemContext), new MovieItemContext(Configuration.GetConnectionString("DefaultConnection"))));
 
         }
 

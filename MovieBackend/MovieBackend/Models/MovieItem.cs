@@ -4,10 +4,11 @@
     {
         [System.ComponentModel.DataAnnotations.Key]
 
-        public string Name { get; set; }
-        public string Vibe { get; set; }
-        public string DateAdded { get; set; }
-        public int Song_ID { get; set; }
-        public int User_ID { get; set; }
+        public int Movie_ID { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ReleaseDate { get; set; }
+        public bool Watched { get; set; }
+        public float Rating { get; set; }
     }
 }
