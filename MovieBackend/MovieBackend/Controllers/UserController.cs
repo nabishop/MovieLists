@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieBackend.Models;
-using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
 namespace MovieBackend.Controllers
@@ -9,46 +8,46 @@ namespace MovieBackend.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserContext _context;
+        private readonly UserContext context;
+
+        public UserController(UserContext context)
+        {
+            this.context = context;
+        }
 
         // GET: api/User
         [HttpGet]
         public ActionResult<IEnumerable<UserItem>> GetAllUsers()
         {
-            return _context.GetUsers();
+            return context.GetUsers();
         }
 
         // GET: api/user/5
         [HttpGet("{id}")]
         public UserItem GetUserWithId(int id)
         {
-            return _context.GetUserWithId(id);
+            return context.GetUserWithId(id);
         }
 
         // POST: api/user
         [HttpPost]
         public void Post([FromBody] UserItem userItem)
         {
-            _context.postUser(userItem);
+            context.PostUser(userItem);
         }
 
         // PUT: api/user/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string password)
         {
-            _context.putNewPassword(id, password);
+            context.PutNewPassword(id, password);
         }
 
         // DELETE: api/user/1
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _context.deleteUser(id);
-        }
-
-        public UserController(UserContext context)
-        {
-            _context = context;
+            context.DeleteUser(id);
         }
     }
 }

@@ -11,27 +11,32 @@ namespace MovieBackend.Controllers
     [ApiController]
     public class MovieItemController : ControllerBase
     {
-        private readonly MovieItemContext _context;
+        private readonly MovieItemContext context;
+
+        public MovieItemController(MovieItemContext context)
+        {
+            this.context = context;
+        }
 
         // GET: api/<controller>
         [HttpGet]
         public ActionResult<IEnumerable<MovieItem>> Get()
         {
-            return _context.GetAllMovies();
+            return context.GetAllMovies();
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
         public MovieItem Get(int id)
         {
-            return _context.GetMovieWithId(id);
+            return context.GetMovieWithId(id);
         }
 
         // POST api/<controller>
         [HttpPost]
         public void Post([FromBody]MovieItem movie)
         {
-            _context.PostNewMovie(movie);
+            context.PostNewMovie(movie);
         }
 
         // PUT api/<controller>/5
@@ -39,19 +44,14 @@ namespace MovieBackend.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]float rating)
         {
-            _context.UpdateMovieRating(id, rating);
+            context.UpdateMovieRating(id, rating);
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _context.DeleteMovie(id);
-        }
-
-        public MovieItemController(MovieItemContext context)
-        {
-            _context = context;
+            context.DeleteMovie(id);
         }
     }
 }

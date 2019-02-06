@@ -43,11 +43,12 @@ namespace MovieBackend.Contexts
                     {
                         movies.Add(new MovieItem()
                         {
-                            Movie_ID = Convert.ToInt32(reader["movie_id"]),
+                            ID = Convert.ToInt32(reader["movie_id"]),
                             Title = reader["title"].ToString(),
                             Description = reader["description"].ToString(),
                             ReleaseDate = reader["release_date"].ToString(),
-                            Rating = Convert.ToDouble(reader["rating"])
+                            Rating = Convert.ToDouble(reader["rating"]),
+                            UserID = Convert.ToInt32(reader["user_id"])
                         });
                     }
                 }
@@ -77,11 +78,12 @@ namespace MovieBackend.Contexts
                     {
                         movie = new MovieItem()
                         {
-                            Movie_ID = Convert.ToInt32(reader["movie_id"]),
+                            ID = Convert.ToInt32(reader["movie_id"]),
                             Title = reader["title"].ToString(),
                             Description = reader["description"].ToString(),
                             ReleaseDate = reader["release_date"].ToString(),
-                            Rating = Convert.ToDouble(reader["rating"])
+                            Rating = Convert.ToDouble(reader["rating"]),
+                            UserID = Convert.ToInt32(reader["user_id"])
                         };
                         if (conn != null)
                         {
@@ -105,13 +107,14 @@ namespace MovieBackend.Contexts
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
 
-                cmd.CommandText = "INSERT INTO movie(title, description, release_date, rating) VALUES(@Title, @Desc, @Date, @Rating)";
+                cmd.CommandText = "INSERT INTO movie(title, description, release_date, rating, user_id) VALUES(@Title, @Desc, @Date, @Rating, @UserID)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@Title", movie.Title);
                 cmd.Parameters.AddWithValue("@Desc", movie.Description);
                 cmd.Parameters.AddWithValue("@Date", movie.ReleaseDate);
                 cmd.Parameters.AddWithValue("@Rating", movie.Rating);
+                cmd.Parameters.AddWithValue("@UserID", movie.UserID);
 
                 cmd.ExecuteNonQuery();
 

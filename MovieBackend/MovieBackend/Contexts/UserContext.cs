@@ -94,7 +94,7 @@ namespace MovieBackend.Models
         }
 
         // post
-        public void postUser(UserItem userItem)
+        public void PostUser(UserItem userItem)
         {
             using (MySqlConnection conn = GetConnection())
             {
@@ -120,7 +120,7 @@ namespace MovieBackend.Models
 
 
         // set a new password for a user
-        public void putNewPassword(int id, string password)
+        public void PutNewPassword(int id, string password)
         {
             using (MySqlConnection conn = GetConnection())
             {
@@ -138,7 +138,7 @@ namespace MovieBackend.Models
             }
         }
 
-        public void deleteUser(int id)
+        public void DeleteUser(int id)
         {
             using (MySqlConnection conn = GetConnection())
             {
