@@ -32,7 +32,9 @@ namespace MovieBackend.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM user", conn);
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "SELECT * FROM user";
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -63,7 +65,10 @@ namespace MovieBackend.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM user WHERE user_id=" + id, conn);
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "SELECT * FROM user WHERE user_id=@ID";
+                cmd.Parameters.AddWithValue("@ID", id);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -106,6 +111,45 @@ namespace MovieBackend.Models
 
                 cmd.ExecuteNonQuery();
 
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+
+        // set a new password for a user
+        public void putNewPassword(int id, NewPassword password)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "UPDATE user SET user_password=@NewPassword WHERE user_id=" + id;
+                cmd.Parameters.AddWithValue("@NewPassword", password.UpdatedPassword);
+
+                cmd.ExecuteNonQuery();
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void deleteUser(int id)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "DELETE FROM user where user_id=" + id;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
                 if (conn != null)
                 {
                     conn.Close();

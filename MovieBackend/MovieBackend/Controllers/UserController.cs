@@ -36,20 +36,7 @@ namespace MovieBackend.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] NewPassword password)
         {
-            using (MySqlConnection conn = new MySqlConnection(_context.ConnectionString))
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "UPDATE user SET user_password=@NewPassword WHERE user_id=" + id;
-                cmd.Parameters.AddWithValue("@NewPassword", password.UpdatedPassword);
-
-                cmd.ExecuteNonQuery();
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
+            _context.putNewPassword(id, password);
         }
 
         // DELETE: api/user/1
