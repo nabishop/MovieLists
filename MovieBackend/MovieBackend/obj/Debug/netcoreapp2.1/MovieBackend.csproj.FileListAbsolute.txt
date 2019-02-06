@@ -12,3 +12,4 @@ C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\ne
 C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\bin\Debug\netcoreapp2.1\MovieBackend.pdb
 C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.dll
 C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\MovieBackend.pdb
+C:\Users\Nick\Documents\GitHub\MovieLists\MovieBackend\MovieBackend\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
