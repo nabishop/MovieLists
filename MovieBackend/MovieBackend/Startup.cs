@@ -54,7 +54,7 @@ namespace MovieBackend
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvc(routes => routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}"));
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod());
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         }
     }
 }
