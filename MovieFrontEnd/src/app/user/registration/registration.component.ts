@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { UserResponse } from '../../shared/userResponse';
 import { observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
@@ -10,9 +11,10 @@ import { observable } from 'rxjs';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(public service: UserService) { }
+  constructor(public service: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.service.formModel.reset();
   }
 
   onSubmit() {
@@ -22,14 +24,16 @@ export class RegistrationComponent implements OnInit {
 
       console.log('stat is ' + status);
 
-    // error in table
-    if (status == '200') {
-
-    }
-    // success
-    else {
-      this.service.register().subscribe();
-    }
+      // error in table since returned 'ok' for finding a user
+      if (status == '200') {
+        this.toastr.error('Username: '+resp.body.name+' is already taken!', 'Registration failed.')
+      }
+      // success: user not already in db
+      else {
+        this.service.register().subscribe();
+        this.toastr.success('User is confirmed!', 'Registration succssful.');
+        this.service.formModel.reset();
+      }
     });
   }
 
