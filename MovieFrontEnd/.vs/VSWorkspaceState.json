@@ -1,0 +1,21 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\node_modules",
+    "\\node_modules\\@angular",
+    "\\node_modules\\@angular\\common",
+    "\\node_modules\\@angular\\common\\esm5",
+    "\\node_modules\\@angular\\common\\esm5\\http",
+    "\\node_modules\\@angular\\common\\esm5\\http\\src",
+    "\\node_modules\\@angular\\common\\http",
+    "\\node_modules\\@angular\\common\\http\\src",
+    "\\node_modules\\@angular\\compiler",
+    "\\node_modules\\@angular\\compiler\\esm2015",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\user\\registration",
+    "\\src\\assets"
+  ],
+  "SelectedNode": "\\src\\assets\\img\\add_user.png",
+  "PreviewInSolutionExplorer": false
+}

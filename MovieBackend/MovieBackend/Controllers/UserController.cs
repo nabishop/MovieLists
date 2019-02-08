@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MovieBackend.Models;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace MovieBackend.Controllers
 {
@@ -9,10 +13,14 @@ namespace MovieBackend.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserContext context;
+        private UserManager<ApplicationUser> userManager;
+        private SignInManager<ApplicationUser> signInManager;
 
-        public UserController(UserContext context)
+        public UserController(UserContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             this.context = context;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         // GET: api/User
@@ -29,11 +37,22 @@ namespace MovieBackend.Controllers
             return context.GetUserWithId(id);
         }
 
+        // GET: api/user/5
+        [HttpGet("{id}")]
+        public UserItem GetUserWithName(string name)
+        {
+            return context.GetUserWithName(name);
+        }
+
         // POST: api/user
         [HttpPost]
-        public void Post([FromBody] UserItem userItem)
+        public void PostAsync(UserTempHolder userItem)
         {
-            context.PostUser(userItem);
+            UserItem item = new UserItem();
+            item.Name = userItem.UserName;
+            item.Password = userItem.Password;
+
+            context.PostUser(item);
         }
 
         // PUT: api/user/5

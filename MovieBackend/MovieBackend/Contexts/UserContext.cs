@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
 namespace MovieBackend.Models
 {
-    public class UserContext : DbContext
+    public class UserContext : IdentityDbContext
     {
         // context helper methods
         public string ConnectionString { get; set; }
@@ -16,6 +17,13 @@ namespace MovieBackend.Models
         {
             ConnectionString = connectionString;
         }
+
+        public UserContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         private MySqlConnection GetConnection()
         {
@@ -69,6 +77,41 @@ namespace MovieBackend.Models
                 cmd.Connection = conn;
                 cmd.CommandText = "SELECT * FROM user WHERE user_id=@ID";
                 cmd.Parameters.AddWithValue("@ID", id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        user = new UserItem()
+                        {
+                            Id = Convert.ToInt32(reader["user_id"]),
+                            Name = reader["user_name"].ToString(),
+                            Password = reader["user_password"].ToString()
+                        };
+                        if (conn != null)
+                        {
+                            conn.Close();
+                        }
+
+                        return user;
+                    }
+                }
+            }
+            return null;
+
+        }
+
+        // get + id
+        public UserItem GetUserWithName(string name)
+        {
+            UserItem user;
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "SELECT * FROM user WHERE user_name=@ID";
+                cmd.Parameters.AddWithValue("@ID", name);
 
                 using (var reader = cmd.ExecuteReader())
                 {

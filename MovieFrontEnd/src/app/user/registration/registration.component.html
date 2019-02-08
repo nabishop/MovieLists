@@ -1,0 +1,39 @@
+<div class="row mt-4">
+  <div class="col-md-6">
+    <div class="row" style="height: 300px;">
+      <div class="col-md-12.my-auto side-header">
+        <img src="/assets/img/add_user.png" class="mx-auto d-block" />
+        <h1>User Registration</h1>
+        <p><em>-MovieLists made with <strong>MySql</strong>, <strong>Asp.Net Core</strong>, and <strong>Angular 7</strong></em></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+      <div class="form-group required">
+        <label>Username</label>
+        <input class="form-control" formControlName="UserName">
+        <label class="text-danger" *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required">Username required!</label>
+      </div>
+      <div formGroupName="Passwords">
+        <div class="form-group required">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="Password">
+          <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">Password required!</label>
+          <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Minimum four characters.</label>
+        </div>
+        <div class="form-group required">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" formControlName="ConfirmPassword">
+          <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">Password confirmation required!</label>
+          <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Password do not match.</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-8 offset-md-2">
+          <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

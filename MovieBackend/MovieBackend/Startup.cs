@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,17 @@ namespace MovieBackend
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddCors();
 
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default Connection")));
+            services.AddDefaultIdentity<ApplicationUser>().AddEntityFrameworkStores<UserContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+            });
+
             services.Add(new ServiceDescriptor(typeof(UserContext), new UserContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(ListItemContext), new ListItemContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(MovieItemContext), new MovieItemContext(Configuration.GetConnectionString("DefaultConnection"))));
@@ -52,10 +64,12 @@ namespace MovieBackend
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
+
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvc(routes => routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}"));
-            app.UseCors(builder => builder.AllowAnyHeader());
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin());
         }
     }
 }
