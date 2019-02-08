@@ -38,8 +38,8 @@ namespace MovieBackend.Controllers
         }
 
         // GET: api/user/5
-        [HttpGet("{id}")]
-        public UserItem GetUserWithName(string name)
+        [HttpGet("{search}/{name}")]
+        public UserItem GetUserWithName(string search, string name)
         {
             return context.GetUserWithName(name);
         }

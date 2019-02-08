@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpResponse } from "@angular/common/http"
+import { Observable } from 'rxjs';
+import { UserResponse } from './userResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,12 @@ export class UserService {
       Password: this.formModel.value.Passwords.Password
     }
 
-    return this.http.post(this.baseURI+'/user', body);
+    return this.http.post(this.baseURI + '/user', body);
+  }
+
+  checkIfInDatabase(){
+    console.log("db" + this.baseURI + '/user/search/' + this.formModel.value.UserName);
+
+    return this.http.get<UserResponse>(this.baseURI + '/user/search/' + this.formModel.value.UserName, {observe: 'response'});
   }
 }
