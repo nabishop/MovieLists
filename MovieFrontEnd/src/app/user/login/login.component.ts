@@ -30,8 +30,9 @@ export class LoginComponent implements OnInit {
         this.registerClick = true;
     }
 
-    onSubmit() {
-        if (!this.registerClick) {
+    onSubmit(buttonClicked: string) {
+        console.log('button clicked is '+ buttonClicked);
+        if (buttonClicked == "login") {
             this.onSubmitLogin();
         }
         else {

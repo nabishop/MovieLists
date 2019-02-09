@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     this.getSubscription = this.service.checkIfInDatabase().subscribe(resp => {
-      console.log('stat is ' + status);
+      console.log('stat is ' + resp.status);
 
       // error in table since returned 'ok' for finding a user
       if (resp.status.toString() == '200') {
@@ -30,10 +30,11 @@ export class RegistrationComponent implements OnInit {
       }
       // success: user not already in db
       else {
-        this.postSubscription = this.service.register().subscribe();
-        this.toastr.success('User is confirmed!', 'Registration succssful.');
-        this.service.formModel.reset();
-        this.router.navigate(['/user/login']) ;
+        this.postSubscription = this.service.register().subscribe(resp => {
+          this.toastr.success('User is confirmed!', 'Registration succssful.');
+          this.service.formModel.reset();
+          this.router.navigate(['/user/login']);
+        });
       }
     });
   }
