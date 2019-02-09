@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+        <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit(buttonType)">
             <div class="form-group required">
                 <label>Username</label>
                 <input class="form-control" formControlName="UserName">
@@ -30,8 +30,13 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-8 offset-md-2">
-                    <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Sign
-                        Up</button>
+                    <button type="submit" (click)="onSubmit('login')" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Log
+                        In</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8 offset-md-2">
+                    <button type="submit" class="btn btn-lg btn-block" (click)="onSubmit('register')">Sign Up</button>
                 </div>
             </div>
         </form>

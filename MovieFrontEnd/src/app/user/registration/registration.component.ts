@@ -26,7 +26,7 @@ export class RegistrationComponent implements OnInit {
 
       // error in table since returned 'ok' for finding a user
       if (resp.status.toString() == '200') {
-        this.toastr.error('Username: ' + resp.body.name + ' is already taken!', 'Registration failed.')
+        this.toastr.error('Username: ' + resp.body.name + ' is already taken!', 'Registration failed.');
       }
       // success: user not already in db
       else {

@@ -7,23 +7,18 @@ import { UserResponse } from './userResponse';
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class LoginService {
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
     readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
 
     formModel = this.fb.group({
         UserName: ['', Validators.required],
-        Password: ['', [Validators.required, Validators.minLength(4)]],
+        Password: ['', Validators.required],
     });
 
     login() {
-        var body = {
-            UserName: this.formModel.value.UserName,
-            Password: this.formModel.value.Password
-        }
-
-        return this.http.post(this.baseURI + '/user', body);
+        return this.http.get<UserResponse>(this.baseURI + '/user/search'+this.formModel.value.UserName);
     }
 
     checkIfInDatabase() {
