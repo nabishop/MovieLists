@@ -14,20 +14,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
     getSubscription: Subscription;
-    registerClick: Boolean;
 
     constructor(public service: LoginService, private toastr: ToastrService, private router: Router) { }
 
     ngOnInit() {
         this.service.formModel.reset();
-    }
-
-    onLoginClick() {
-        this.registerClick = false;
-    }
-
-    onRegisterClick() {
-        this.registerClick = true;
     }
 
     onSubmit(buttonClicked: string) {
@@ -53,7 +44,7 @@ export class LoginComponent implements OnInit {
                 else {
                     this.toastr.success(this.service.formModel.value.UserName + ' logged in!', 'Login succssful.');
                     this.service.formModel.reset();
-                    this.router.navigate(['/user/registration']);
+                    this.router.navigate(['/movies']);
                 }
             }
             // user is not in db

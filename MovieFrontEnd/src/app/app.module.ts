@@ -12,13 +12,17 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { UserService } from './shared/user.service';
 import { LoginService } from './shared/login.service'
 import { LoginComponent } from './user/login/login.component';
+import { MoviesComponent } from './movies/movies.component';
+import { ListService } from './shared/list.service';
+import { MovieService } from './shared/movie.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,7 @@ import { LoginComponent } from './user/login/login.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [UserService, LoginService],
+  providers: [UserService, LoginService, ListService, MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
