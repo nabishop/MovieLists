@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/user.service';
 import { UserResponse } from '../../shared/userResponse';
-import { observable } from 'rxjs';
+import { observable, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -10,31 +11,37 @@ import { ToastrService } from 'ngx-toastr';
   styles: []
 })
 export class RegistrationComponent implements OnInit {
+  getSubscription: Subscription;
+  postSubscription: Subscription;
 
-  constructor(public service: UserService, private toastr: ToastrService) { }
+  constructor(public service: UserService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
     this.service.formModel.reset();
   }
 
   onSubmit() {
-    var status;
-    this.service.checkIfInDatabase().subscribe(resp => {
-      status = resp.status;
-
+    this.getSubscription = this.service.checkIfInDatabase().subscribe(resp => {
       console.log('stat is ' + status);
 
       // error in table since returned 'ok' for finding a user
-      if (status == '200') {
-        this.toastr.error('Username: '+resp.body.name+' is already taken!', 'Registration failed.')
+      if (resp.status.toString() == '200') {
+        this.toastr.error('Username: ' + resp.body.name + ' is already taken!', 'Registration failed.')
       }
       // success: user not already in db
       else {
-        this.service.register().subscribe();
+        this.postSubscription = this.service.register().subscribe();
         this.toastr.success('User is confirmed!', 'Registration succssful.');
         this.service.formModel.reset();
+        this.router.navigate(['/user/login']) ;
       }
     });
+  }
+
+  // no memory leaks
+  ngOnDestroy() {
+    if (this.getSubscription != null) { this.getSubscription.unsubscribe(); }
+    if (this.postSubscription != null) { this.postSubscription.unsubscribe(); }
   }
 
 }
