@@ -15,6 +15,8 @@ import { LoginComponent } from './user/login/login.component';
 import { MoviesComponent } from './movies/movies.component';
 import { ListService } from './shared/list.service';
 import { MovieService } from './shared/movie.service';
+import { ListComponent } from './movies/list_item/list.component';
+import { MovieItemComponent } from './movies/movie_item/movieitem.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MovieService } from './shared/movie.service';
     UserComponent,
     RegistrationComponent,
     LoginComponent,
-    MoviesComponent
+    MoviesComponent,
+    ListComponent,
+    MovieItemComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
 import { MoviesComponent } from './movies/movies.component';
+import { ListComponent } from './movies/list_item/list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -14,7 +15,15 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent }
     ],
   },
-  { path: 'movies', component: MoviesComponent }
+  {
+    path: 'movies', component: MoviesComponent,
+    children: [
+      {
+        path: 'lists', component: ListComponent,
+        children: [{ path: 'movies', component: MoviesComponent }]
+      },
+    ]
+  }
 ];
 
 @NgModule({

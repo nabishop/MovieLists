@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #ffc107;
+  background-color: #e0f7fa;
 }
 
+
 input.form-control, input.form-control:focus {
-  background-color: #ffc107;
+  background-color: #e0f7fa;
   color: black;
   border-color: black;
   border-radius: 0px;
@@ -41,8 +40,25 @@ form {
 div.side-header {
   border: 3px solid black;
   padding: 15px;
+  background-color: #e3f2fd;
 }
 
 #toast-container > div {
   opacity:1;
 }
+
+.jumbotron{
+  position: relative;
+  background: #80deea;
+  margin-top: 0px;
+  padding-left: -4px;
+  padding-right: -4px;
+  text-align:center;
+  margin-bottom: 0 !important;
+}
+.container-fluid{
+  padding-right:4px !important;
+  padding-left: 4px !important;
+  padding-bottom: 4px !important;
+}
+

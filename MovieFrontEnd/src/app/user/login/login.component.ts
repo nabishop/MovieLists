@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/login.service';
 import { UserResponse } from '../../shared/userResponse';
-import { observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
     getSubscription: Subscription;
+    userId: number;
 
     constructor(public service: LoginService, private toastr: ToastrService, private router: Router) { }
 
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(buttonClicked: string) {
-        console.log('button clicked is '+ buttonClicked);
+        console.log('button clicked is ' + buttonClicked);
         if (buttonClicked == "login") {
             this.onSubmitLogin();
         }
@@ -42,6 +43,10 @@ export class LoginComponent implements OnInit {
                     this.toastr.error('Password not valid.', 'Login failed.');
                 }
                 else {
+                    this.service.user = resp.body;
+
+                    this.userId = resp.body.id;
+
                     this.toastr.success(this.service.formModel.value.UserName + ' logged in!', 'Login succssful.');
                     this.service.formModel.reset();
                     this.router.navigate(['/movies']);
@@ -60,7 +65,9 @@ export class LoginComponent implements OnInit {
 
     // no memory leaks
     ngOnDestroy() {
+        console.log('destroying');
         if (this.getSubscription != null) { this.getSubscription.unsubscribe(); }
+        console.log(this.getSubscription);
     }
 
 }

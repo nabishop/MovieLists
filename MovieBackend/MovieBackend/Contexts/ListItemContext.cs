@@ -45,7 +45,7 @@ namespace MovieBackend.Contexts
                     {
                         lists.Add(new ListItem()
                         {
-                            Name = reader["list_name"].ToString(),
+                            Name = reader["name"].ToString(),
                             DateAdded = reader["date_added"].ToString(),
                             Movie_ID = Convert.ToInt32(reader["movie_id"]),
                             User_ID = Convert.ToInt32(reader["user_id"])
@@ -71,7 +71,7 @@ namespace MovieBackend.Contexts
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "SELECT * FROM movie WHERE movie_id AND user_id IN (SELECT movie_id AND user_id FROM movielist WHERE user_id=@ID AND list_name=@NAME)";
+                cmd.CommandText = "SELECT * FROM movie WHERE movie_id AND user_id IN (SELECT movie_id AND user_id FROM movielist WHERE user_id=@ID AND name=@NAME)";
                 cmd.Parameters.AddWithValue("@ID", userId);
                 cmd.Parameters.AddWithValue("@NAME", listName);
 
@@ -108,7 +108,7 @@ namespace MovieBackend.Contexts
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
 
-                cmd.CommandText = "INSERT INTO movielist(list_name, date_added, movie_id, user_id) VALUES(@Name, @Date, @Movie, @User)";
+                cmd.CommandText = "INSERT INTO movielist(name, date_added, movie_id, user_id) VALUES(@Name, @Date, @Movie, @User)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@Name", listItem.Name);
@@ -134,7 +134,7 @@ namespace MovieBackend.Contexts
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "UPDATE movielist SET list_name=@NewName WHERE user_id=@User AND list_name=@OldName";
+                cmd.CommandText = "UPDATE movielist SET list_name=@NewName WHERE user_id=@User AND name=@OldName";
                 cmd.Parameters.AddWithValue("@NewName", change.NewName);
                 cmd.Parameters.AddWithValue("@User", id);
                 cmd.Parameters.AddWithValue("@OldName", change.OldName);
@@ -156,11 +156,12 @@ namespace MovieBackend.Contexts
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
 
-                cmd.CommandText = "DELETE FROM movielist where user_id=@UserID AND list_name=@ListName";
+                cmd.CommandText = "DELETE FROM movielist where user_id=@UserID AND name=@ListName";
                 cmd.Parameters.AddWithValue("@UserId", id);
                 cmd.Parameters.AddWithValue("@ListName", name);
 
                 cmd.ExecuteNonQuery();
+
 
                 conn.Close();
                 if (conn != null)

@@ -8,9 +8,10 @@ import { UserResponse } from './userResponse';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
   readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
+  public user: UserResponse;
+  
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],

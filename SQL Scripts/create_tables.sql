@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS movielist(
 	user_id INT UNSIGNED NOT NULL,
 	name VARCHAR(30) NOT NULL,
     date_added VARCHAR(10) NOT NULL,
-    movie_id INT UNSIGNED NOT NULL
+    movie_id INT UNSIGNED
 );
 
 DROP TABLE IF EXISTS movie;
