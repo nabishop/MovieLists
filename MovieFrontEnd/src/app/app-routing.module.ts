@@ -5,6 +5,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { MoviesComponent } from './movies/movies.component';
 import { ListComponent } from './movies/list_item/list.component';
+import { MovieItemComponent } from './movies/movie_item/movieitem.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/user/login', pathMatch: 'full' },
@@ -20,7 +21,7 @@ const routes: Routes = [
     children: [
       {
         path: 'lists', component: ListComponent,
-        children: [{ path: 'movies', component: MoviesComponent }]
+        children: [{ path: 'movieitem', component: MovieItemComponent }]
       },
     ]
   }

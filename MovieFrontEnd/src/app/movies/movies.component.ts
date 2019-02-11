@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from "@angular/common/http"
 import { ListService } from '../shared/list.service';
 import { LoginService } from '../shared/login.service';
 import { ToastrService } from 'ngx-toastr';
-import { ListComponent } from './list_item/list.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { ListComponent } from './list_item/list.component';
 export class MoviesComponent implements OnInit {
     playlists = [];
 
-    constructor(private http: HttpClient, private listService: ListService, private loginService: LoginService, private toastr: ToastrService) { }
+    constructor(private http: HttpClient, private listService: ListService, private loginService: LoginService, private toastr: ToastrService, private router: Router) { }
 
     ngOnInit() {
 
@@ -25,6 +25,7 @@ export class MoviesComponent implements OnInit {
         this.listService.addList(this.loginService.user.id, listname).subscribe(resp => {
             console.log(resp.status);
             this.toastr.success('Success! Added ' + listname + '!', 'Adding new list success.');
+            this.router.navigate(['/movies']);
         },
             err => {
                 this.toastr.error('No duplicate names allowed!', 'Adding new list failure.');
