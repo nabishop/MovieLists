@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-movies-listitem',
   templateUrl: './list.component.html',
-  styles: []
+  styles: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
   listsSubscription: Subscription;
@@ -35,6 +35,10 @@ export class ListComponent implements OnInit {
         this.toastr.error('Error retriving lists', 'List retrieval failed.');
       }
     });
+  }
+
+  onSubmit(listname: string){
+    console.log('recieving from list '+listname);
   }
 
 }

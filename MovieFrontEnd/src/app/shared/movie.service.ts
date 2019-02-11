@@ -9,7 +9,13 @@ import { UserResponse } from './userResponse';
 })
 export class MovieService {
 
-    readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
+    readonly baseURIDB = 'https://socreatemoviebackend.azurewebsites.net/api';
+    readonly baseURIOMDB = 'http://www.omdbapi.com';
+    private readonly apiKey = '&apikey=2313d21a2313d21a';
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
+
+    searchMovie(movieName: string){
+        return this.http.get(this.baseURIOMDB+'/?t='+movieName+this.apiKey,  { observe: 'response' })
+    }
 }

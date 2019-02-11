@@ -17,6 +17,11 @@ import { ListService } from './shared/list.service';
 import { MovieService } from './shared/movie.service';
 import { ListComponent } from './movies/list_item/list.component';
 import { MovieItemComponent } from './movies/movie_item/movieitem.component';
+import { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelHeader, MatAccordion } from '@angular/material';
+import { PortalModule } from '@angular/cdk/portal';
+
+export { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelHeader, MatAccordion } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -34,8 +39,12 @@ import { MovieItemComponent } from './movies/movie_item/movieitem.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
-  ],
+    ToastrModule.forRoot(),
+    MatIconModule,
+    MatListModule,
+    PortalModule,
+    MatExpansionModule
+    ],
   providers: [UserService, LoginService, ListService, MovieService],
   bootstrap: [AppComponent]
 })

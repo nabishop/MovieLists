@@ -9,7 +9,6 @@ import { UserResponse } from './userResponse';
 })
 export class UserService {
   readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
-  public user: UserResponse;
   
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
