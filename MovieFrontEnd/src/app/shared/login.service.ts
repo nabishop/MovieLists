@@ -10,6 +10,7 @@ import { UserResponse } from './userResponse';
 export class LoginService {
     readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
     public user: UserResponse;
+    public lists = [];
 
     constructor(private fb: FormBuilder, private http: HttpClient) {
     }

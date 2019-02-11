@@ -8,12 +8,13 @@ import { UserResponse } from './userResponse';
 })
 export class ListService {
     readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
+    public lists = [];
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
 
     // id is user id
     getLists(id: number) {
-        return this.http.get<UserResponse[]>(this.baseURI + '/list/' + id, { observe: 'response' });
+        return this.http.get<any[]>(this.baseURI + '/list/' + id, { observe: 'response' });
     }
 
     renameList(id: number, oldn: string, newn: string) {
@@ -21,18 +22,18 @@ export class ListService {
             "oldname": oldn,
             "newname": newn
         };
-        this.http.put<UserResponse>(this.baseURI + '/list/' + id, change, { observe: 'response' });
+        this.http.put(this.baseURI + '/list/' + id, change, { observe: 'response' });
     }
 
     addList(id: number, name: string) {
         var newList = {
             "name": name,
             "dateAdded": Date.now().toString(),
-            "movie_id": null,
+            "movie_id": 0,
             "user_id": id
         }
 
-        this.http.post<UserResponse>(this.baseURI + '/list/' + id, newList, { observe: 'response' });
+        return this.http.post(this.baseURI + '/list', newList, { observe: 'response' });
     }
 
     deleteList(id: number, name: string) {

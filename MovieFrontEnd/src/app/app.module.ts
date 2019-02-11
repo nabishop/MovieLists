@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr'
@@ -43,7 +43,8 @@ export { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, Ma
     MatIconModule,
     MatListModule,
     PortalModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule 
     ],
   providers: [UserService, LoginService, ListService, MovieService],
   bootstrap: [AppComponent]

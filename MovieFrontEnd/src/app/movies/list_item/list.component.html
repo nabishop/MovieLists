@@ -3,7 +3,15 @@
         {{list.name}}
     </h4>
     <h6>Created {{list.dateAdded}}</h6>
-    <button type="submit" class="btn btn-info btn-sm" (click)="onSubmit(list.name)">Add movie</button>
+    
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" placeholder="Search for...">
+            <form>
+                <button class="btn btn-secondary" type="button">Go!</button>
+            </form>
+        </div>
+    </div>
 
     <app-movies-movieitem a="b"></app-movies-movieitem>
 

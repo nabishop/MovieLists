@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class ListComponent implements OnInit {
   listsSubscription: Subscription;
-  public lists = [];
+  lists: any[];
 
   constructor(private listService: ListService, private loginService: LoginService, private toastr: ToastrService) { }
 
@@ -28,17 +28,12 @@ export class ListComponent implements OnInit {
       // user is found in db
       if (resp.status.toString() == '200') {
         // error: passwords not the same but right user
-        this.lists = resp.body;
-        console.log(this.lists);
+        this.listService.lists = resp.body;
+        this.lists = this.listService.lists;
       }
       else {
         this.toastr.error('Error retriving lists', 'List retrieval failed.');
       }
     });
   }
-
-  onSubmit(listname: string){
-    console.log('recieving from list '+listname);
-  }
-
 }
