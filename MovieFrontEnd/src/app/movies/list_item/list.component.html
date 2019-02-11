@@ -1,8 +1,8 @@
-<div class="list-group-item">
+<div class="list-group-item" *ngFor="let list of lists">
     <h4 class="list-group-item-heading">
-        Horror
+        {{list.name}}
     </h4>
-    <h6>Created 2/9/2019</h6>
+    <h6>Created {{list.dateAdded}}</h6>
 
     <app-movies-movieitem a="b"></app-movies-movieitem>
 

@@ -27,7 +27,7 @@ export class ListService {
     addList(id: number, name: string) {
         var newList = {
             "name": name,
-            "dateadded": Date.now().toString(),
+            "dateAdded": Date.now().toString(),
             "movie_id": null,
             "user_id": id
         }
