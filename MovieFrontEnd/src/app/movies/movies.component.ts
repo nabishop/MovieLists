@@ -25,7 +25,6 @@ export class MoviesComponent implements OnInit {
         this.listService.addList(this.loginService.user.id, listname).subscribe(resp => {
             console.log(resp.status);
             this.toastr.success('Success! Added ' + listname + '!', 'Adding new list success.');
-            this.router.navigate(['/movies']);
         },
             err => {
                 this.toastr.error('No duplicate names allowed!', 'Adding new list failure.');

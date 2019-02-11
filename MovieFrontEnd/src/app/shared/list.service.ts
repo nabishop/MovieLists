@@ -37,6 +37,6 @@ export class ListService {
     }
 
     deleteList(id: number, name: string) {
-        this.http.delete<UserResponse>(this.baseURI + '/list/' + id + '/' + name, { observe: 'response' });
+        return this.http.delete<UserResponse>(this.baseURI + '/list/' + id + '/' + name, { observe: 'response' });
     }
 }

@@ -36,4 +36,12 @@ export class ListComponent implements OnInit {
       }
     });
   }
+
+  deleteList(name: string) {
+    console.log(name);
+    this.listService.deleteList(this.loginService.user.id, name).subscribe(resp => {
+      // reload lists
+      this.getListsOfUser();
+    });
+  }
 }
