@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpResponse } from "@angular/common/http"
 import { Observable } from 'rxjs';
 import { UserResponse } from './userResponse';
+import { MovieModel } from '../movies/list_item/moviemodel';
 
 @Injectable({
     providedIn: 'root'
@@ -17,5 +18,9 @@ export class MovieService {
 
     searchMovie(movieName: string){
         return this.http.get(this.baseURIOMDB+'/?t='+movieName+this.apiKey,  { observe: 'response' })
+    }
+
+    getMoviesForList(listname: string){
+        return this.http.get<MovieModel[]>(this.baseURIDB+'/movie/'+listname,  { observe: 'response' })
     }
 }

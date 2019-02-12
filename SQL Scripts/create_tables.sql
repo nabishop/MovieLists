@@ -23,5 +23,6 @@ CREATE TABLE IF NOT EXISTS movie(
     description VARCHAR(200) NOT NULL,
     release_date VARCHAR(10) NOT NULL,
     rating FLOAT DEFAULT NULL,
-    user_id INT UNSIGNED NOT NULL
+    user_id INT UNSIGNED NOT NULL,
+    list_name VARCHAR(30)
 );

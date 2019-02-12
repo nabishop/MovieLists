@@ -61,43 +61,6 @@ namespace MovieBackend.Contexts
             return lists;
         }
 
-
-        // get + id
-        public List<MovieItem> GetMovieList(int userId, string listName)
-        {
-            List<MovieItem> movielist = new List<MovieItem>();
-            using (MySqlConnection conn = GetConnection())
-            {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                cmd.CommandText = "SELECT * FROM movie WHERE movie_id AND user_id IN (SELECT movie_id AND user_id FROM movielist WHERE user_id=@ID AND name=@NAME)";
-                cmd.Parameters.AddWithValue("@ID", userId);
-                cmd.Parameters.AddWithValue("@NAME", listName);
-
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        movielist.Add(new MovieItem()
-                        {
-                            ID = Convert.ToInt32(reader["movie_id"]),
-                            Title = reader["title"].ToString(),
-                            Description = reader["description"].ToString(),
-                            ReleaseDate = reader["release_date"].ToString(),
-                            Rating = Convert.ToDouble(reader["rating"]),
-                            UserID = Convert.ToInt32(reader["user_id"])
-                        });
-                        if (conn != null)
-                        {
-                            conn.Close();
-                        }
-                    }
-                }
-                return movielist;
-            }
-        }
-
         // post
         public void PostList(ListItem listItem)
         {
@@ -160,6 +123,29 @@ namespace MovieBackend.Contexts
                 cmd.CommandText = "DELETE FROM movielist where user_id=@UserID AND name=@ListName";
                 cmd.Parameters.AddWithValue("@UserId", id);
                 cmd.Parameters.AddWithValue("@ListName", name);
+
+                cmd.ExecuteNonQuery();
+
+
+                conn.Close();
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void deleteAllList(int id)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+
+                cmd.CommandText = "DELETE FROM movielist where user_id=@UserID";
+                cmd.Parameters.AddWithValue("@UserId", id);
 
                 cmd.ExecuteNonQuery();
 

@@ -26,10 +26,10 @@ namespace MovieBackend.Controllers
         }
 
         // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public MovieItem Get(int id)
+        [HttpGet("{listname}")]
+        public List<MovieItem> Get(string listName)
         {
-            return context.GetMovieWithId(id);
+            return context.GetMovieWithListName(listName);
         }
 
         // POST api/<controller>

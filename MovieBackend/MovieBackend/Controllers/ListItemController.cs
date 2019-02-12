@@ -32,14 +32,6 @@ namespace MovieBackend.Controllers
             return context.GetAllListsWithUserId(id);
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}/{name}")]
-        public ActionResult<IEnumerable<MovieItem>> Get(int userId, string name)
-        {
-            return context.GetMovieList(userId, name);
-        }
-
-
         // POST api/<controller>
         [HttpPost]
         public void Post([FromBody]ListItem listItem)
@@ -59,6 +51,13 @@ namespace MovieBackend.Controllers
         public void Delete(int id, string name)
         {
             context.deleteList(id, name);
+        }
+
+        // DELETE api/<controller>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            context.deleteAllList(id);
         }
     }
 }

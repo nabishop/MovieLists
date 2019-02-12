@@ -5,17 +5,20 @@ import { LoginService } from 'src/app/shared/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ListItem } from './listitem';
+import { MovieModel } from './moviemodel';
+import { MovieService } from 'src/app/shared/movie.service';
 
 @Component({
   selector: 'app-movies-listitem',
   templateUrl: './list.component.html',
-  styles: ['./list.component.css']
+  styles: []
 })
 export class ListComponent implements OnInit {
   listsSubscription: Subscription;
   lists: ListItem[];
+  movies: MovieModel[];
 
-  constructor(private listService: ListService, private loginService: LoginService, private toastr: ToastrService) { }
+  constructor(private listService: ListService, private loginService: LoginService, private toastr: ToastrService, private movieService: MovieService) { }
 
   ngOnInit() {
     console.log(this.loginService.user);
@@ -30,10 +33,13 @@ export class ListComponent implements OnInit {
       if (resp.status.toString() == '200') {
         // error: passwords not the same but right user
         this.lists = resp.body;
-        console.log(this.lists);
         this.lists.sort(this.sortListByDateAdded);
-        console.log(this.lists);
 
+        for(let list of this.lists){
+          this.movieService.getMoviesForList(list.name).subscribe(resp=>{
+            list.lists=resp.body;
+          });
+        }
       }
       else {
         this.toastr.error('Error retriving lists', 'List retrieval failed.');

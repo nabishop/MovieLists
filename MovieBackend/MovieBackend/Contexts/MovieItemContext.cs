@@ -48,7 +48,8 @@ namespace MovieBackend.Contexts
                             Description = reader["description"].ToString(),
                             ReleaseDate = reader["release_date"].ToString(),
                             Rating = Convert.ToDouble(reader["rating"]),
-                            UserID = Convert.ToInt32(reader["user_id"])
+                            UserID = Convert.ToInt32(reader["user_id"]),
+                            ListName = reader["list_name"].ToString()
                         });
                     }
                 }
@@ -61,40 +62,35 @@ namespace MovieBackend.Contexts
         }
 
         // get + id
-        public MovieItem GetMovieWithId(int id)
+        public List<MovieItem> GetMovieWithListName(string listname)
         {
-            MovieItem movie;
+            List<MovieItem> movies = new List<MovieItem>();
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "SELECT * FROM movie WHERE movie_id=@ID";
-                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.CommandText = "SELECT * FROM movie WHERE list_name=@Name";
+                cmd.Parameters.AddWithValue("@Name", listname);
 
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        movie = new MovieItem()
+                        movies.Add(new MovieItem()
                         {
                             ID = Convert.ToInt32(reader["movie_id"]),
                             Title = reader["title"].ToString(),
                             Description = reader["description"].ToString(),
                             ReleaseDate = reader["release_date"].ToString(),
                             Rating = Convert.ToDouble(reader["rating"]),
-                            UserID = Convert.ToInt32(reader["user_id"])
-                        };
-                        if (conn != null)
-                        {
-                            conn.Close();
-                        }
-
-                        return movie;
+                            UserID = Convert.ToInt32(reader["user_id"]),
+                            ListName = reader["list_name"].ToString()
+                        });
                     }
                 }
             }
-            return null;
+            return movies;
         }
 
         // add a new movie to the db
@@ -107,7 +103,7 @@ namespace MovieBackend.Contexts
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
 
-                cmd.CommandText = "INSERT INTO movie(title, description, release_date, rating, user_id) VALUES(@Title, @Desc, @Date, @Rating, @UserID)";
+                cmd.CommandText = "INSERT INTO movie(title, description, release_date, rating, user_id, list_name) VALUES(@Title, @Desc, @Date, @Rating, @UserID, @ListName)";
                 cmd.Prepare();
 
                 cmd.Parameters.AddWithValue("@Title", movie.Title);
@@ -115,6 +111,7 @@ namespace MovieBackend.Contexts
                 cmd.Parameters.AddWithValue("@Date", movie.ReleaseDate);
                 cmd.Parameters.AddWithValue("@Rating", movie.Rating);
                 cmd.Parameters.AddWithValue("@UserID", movie.UserID);
+                cmd.Parameters.AddWithValue("@ListName", movie.ListName);
 
                 cmd.ExecuteNonQuery();
 

@@ -10,5 +10,6 @@
         public string ReleaseDate { get; set; }
         public double Rating { get; set; }
         public int UserID { get; set; }
+        public string ListName { get; set; }
     }
 }

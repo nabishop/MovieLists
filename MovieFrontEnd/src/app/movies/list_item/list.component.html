@@ -4,9 +4,10 @@
             {{list.name}}
         </h4>
         <input type="text" #newname placeholder="Rename list to...">
-            <form>
-                <button class="btn btn-secondary" (click)="editListName(list.name, newname.value)" type="button">Rename</button>
-            </form>
+        <form>
+            <button class="btn btn-secondary" (click)="editListName(list.name, newname.value)"
+                type="button">Rename</button>
+        </form>
     </div>
 
     <h6>Created {{list.dateAdded}}</h6>
@@ -23,6 +24,21 @@
         <button class="btn btn-warning" type="button" (click)="deleteList(list.name)">Delete list</button>
     </div>
 
-    <app-movies-movieitem a="b"></app-movies-movieitem>
-
+    <div class="list-group-item" *ngFor="let movie of list.lists">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                {{movie.title}}
+            </mat-expansion-panel-header>
+            <mat-list-item>
+                <p>
+                    {{movie.releaseDate}}
+                </p>
+                <input type="checkbox" name="watched" value="watched_true">Watched<br>
+                <input type="number" name="rating">{{movie.rating}}<br>
+                <p>
+                    {{movie.description}}
+                </p>
+            </mat-list-item>
+        </mat-expansion-panel>
+    </div>
 </div>

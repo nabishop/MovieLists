@@ -1,6 +1,9 @@
+import { MovieModel } from './moviemodel';
+
 export interface ListItem {
     "name": string,
     "dateAdded": string,
     "movie_id": number,
-    "user_id": number
+    "user_id": number,
+    "lists": Array<MovieModel>
 }
