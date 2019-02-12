@@ -3,6 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpResponse, HttpClientModule } from "@angular/common/http"
 import { UserResponse } from './userResponse';
 
+declare var require: any
+
 @Injectable({
     providedIn: 'root'
 })

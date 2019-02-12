@@ -12,7 +12,7 @@ import { SearchdMovie } from '../movies/list_item/searchedmovie';
 export class MovieService {
 
     readonly baseURIDB = 'https://socreatemoviebackend.azurewebsites.net/api';
-    readonly baseURIOMDB = 'http://www.omdbapi.com';
+    readonly baseURIOMDB = 'https://www.omdbapi.com';
     private readonly apiKey = '&apikey=2313d21a';
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/47445995-d8ed-4ff0-9804-b7fd39344ed8/resourceGroups/TigerMusicResource/providers/Microsoft.Web/sites/socreatemovies",
+    "appService.deploySubpath": "dist\\MovieFrontEnd"
+}
