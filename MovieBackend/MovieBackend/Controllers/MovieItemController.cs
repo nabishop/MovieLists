@@ -41,10 +41,10 @@ namespace MovieBackend.Controllers
 
         // PUT api/<controller>/5
         // change the list name
-        [HttpPut("{id}")]
-        public void Put(string moviename, [FromBody]float rating)
+        [HttpPut]
+        public void Put([FromBody] RatingChange ratingChange)
         {
-            context.UpdateMovieRating(moviename, rating);
+            context.UpdateMovieRating(ratingChange.name, ratingChange.rating);
         }
 
         // PUT api/<controller>/5

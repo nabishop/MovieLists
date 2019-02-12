@@ -17,27 +17,32 @@ export class MovieService {
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
 
-    searchMovie(movieName: string){
-        return this.http.get(this.baseURIOMDB+'/?t='+movieName+this.apiKey);
+    searchMovie(movieName: string) {
+        return this.http.get(this.baseURIOMDB + '/?t=' + movieName + this.apiKey);
     }
 
-    getMoviesForList(listname: string){
-        return this.http.get<MovieModel[]>(this.baseURIDB+'/movie/'+listname,  { observe: 'response' });
+    getMoviesForList(listname: string) {
+        return this.http.get<MovieModel[]>(this.baseURIDB + '/movie/' + listname, { observe: 'response' });
     }
 
-    renameMovieWithList(oldname: string, newname: string){
-        return this.http.put(this.baseURIDB+'/movie/'+oldname+'/'+newname,  { observe: 'response' });
+    renameMovieWithList(oldname: string, newname: string) {
+        return this.http.put(this.baseURIDB + '/movie/' + oldname + '/' + newname, { observe: 'response' });
     }
 
-    deleteMoviesWithId(id: number){
-        return this.http.delete(this.baseURIDB+'/movie/'+id,  { observe: 'response' });
+    deleteMoviesWithId(id: number) {
+        return this.http.delete(this.baseURIDB + '/movie/' + id, { observe: 'response' });
     }
 
-    addMovie(movieItem: any){
-        return this.http.post(this.baseURIDB+'/movie',  movieItem, { observe: 'response' });
+    addMovie(movieItem: any) {
+        return this.http.post(this.baseURIDB + '/movie', movieItem, { observe: 'response' });
     }
 
-    editRating(name: string, rating: number){
-        return this.http.put(this.baseURIDB+'/movie/'+name, rating,  { observe: 'response' });
+    editRating(name: string, rating: number) {
+        var ratingChange = {
+            "rating": rating,
+            "name": name
+        }
+
+        return this.http.put(this.baseURIDB + '/movie', ratingChange, { observe: 'response' });
     }
 }

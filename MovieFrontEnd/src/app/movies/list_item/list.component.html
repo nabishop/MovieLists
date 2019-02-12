@@ -42,8 +42,13 @@
                                 Release Date: {{movie.releaseDate}}
                             </p>
                         </div>
+
                         <h6>My rating</h6>
-                        <ngb-rating [(rate)]="starSelected" [readonly]="readonly" (click)="updateRating(movie.title)"></ngb-rating>
+                        <ngb-rating [(ngModel)]="movie.rating" [(rate)]="movie.rating" [readonly]="readonly"
+                            (click)="updateRating(movie)"></ngb-rating>
+                        <pre>Current Rating: <b>{{movie.rating}}</b></pre>
+
+
                         <h6>Description</h6>
                         <p>
                             {{movie.description}}

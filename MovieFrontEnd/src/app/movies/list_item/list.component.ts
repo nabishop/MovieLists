@@ -125,9 +125,9 @@ export class ListComponent implements OnInit {
     }
   }
 
-  updateRating(title: string) {
-    this.movieService.editRating(title, this.starSelected).subscribe(resp => {
-      this.getListsOfUser();
-    });
+  updateRating(movie: MovieModel) {
+    console.log(movie.rating);
+
+    this.movieService.editRating(movie.title, movie.rating).subscribe();
   }
 }
