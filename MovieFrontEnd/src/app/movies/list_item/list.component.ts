@@ -35,9 +35,9 @@ export class ListComponent implements OnInit {
         this.lists = resp.body;
         this.lists.sort(this.sortListByDateAdded);
 
-        for(let list of this.lists){
-          this.movieService.getMoviesForList(list.name).subscribe(resp=>{
-            list.lists=resp.body;
+        for (let list of this.lists) {
+          this.movieService.getMoviesForList(list.name).subscribe(resp => {
+            list.lists = resp.body;
           });
         }
       }
@@ -63,7 +63,9 @@ export class ListComponent implements OnInit {
 
   editListName(oldname: string, newname: string) {
     this.listService.renameList(this.loginService.user.id, oldname, newname).subscribe(resp => {
-      this.getListsOfUser();
+      this.movieService.renameList(oldname, newname).subscribe(resp => {
+        this.getListsOfUser();
+      });
     });
   }
 }

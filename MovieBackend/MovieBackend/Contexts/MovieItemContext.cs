@@ -145,6 +145,29 @@ namespace MovieBackend.Contexts
             }
         }
 
+        // update movie rating (PUT)
+        public void UpdateMovieListName(string oldname, string newname)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+
+                // change rating
+                cmd.CommandText = "UPDATE movie SET list_name=@NewName WHERE list_name=@OldName";
+                cmd.Parameters.AddWithValue("@NewName", newname);
+                cmd.Parameters.AddWithValue("@OldName", oldname);
+                cmd.ExecuteNonQuery();
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
 
         // Delete movie
         public void DeleteMovie(int id)

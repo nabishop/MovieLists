@@ -47,6 +47,14 @@ namespace MovieBackend.Controllers
             context.UpdateMovieRating(id, rating);
         }
 
+        // PUT api/<controller>/5
+        // change the list name
+        [HttpPut("{oldname}/{newname}")]
+        public void Put(string oldname, string newname)
+        {
+            context.UpdateMovieListName(oldname, newname);
+        }
+
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
