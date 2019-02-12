@@ -82,7 +82,7 @@ export class ListComponent implements OnInit {
     this.curSearch = $event.target.value;
     console.log(this.curSearch);
 
-    if (this.curSearch.length >= 3) {
+    if (this.curSearch.length >= 2) {
       this.movieService.searchMovie(this.curSearch).subscribe(resp => {
         console.log(resp);
         let stringresp = JSON.stringify(resp);
@@ -92,9 +92,30 @@ export class ListComponent implements OnInit {
 
         list.searchlist = [{
           Title: objresp.Title,
-          Plot: objresp.Plot
+          Plot: objresp.Plot,
+          Released: objresp.Released
         }];
       });
+    }
+  }
+
+  addSearchedMovie(list: ListItem) {
+    if (list.searchlist.length > 0) {
+      let tempMovie = {
+        Title: list.searchlist[0].Title,
+        Description: list.searchlist[0].Plot,
+        ReleaseDate: list.searchlist[0].Released,
+        Rating: -1,
+        UserID: this.loginService.user.id,
+        ListName: list.name
+      };
+
+      this.movieService.addMovie(tempMovie).subscribe(resp => {
+        this.getListsOfUser();
+      });
+    }
+    else {
+      this.toastr.info('Type in a search first!', 'Add new movie incomplete.');
     }
   }
 }

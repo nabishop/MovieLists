@@ -17,7 +17,7 @@
             <div class="input-group">
                 <input type="text" (keydown)="searchOmdb($event, list)" placeholder="Search for...">
                 <form>
-                    <button class="btn btn-secondary" type="button">Go!</button>
+                    <button class="btn btn-secondary" type="button" (click)="addSearchedMovie(list)">Go!</button>
                 </form>
             </div>
 

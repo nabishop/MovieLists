@@ -32,4 +32,8 @@ export class MovieService {
     deleteMoviesWithId(id: number){
         return this.http.delete(this.baseURIDB+'/movie/'+id,  { observe: 'response' });
     }
+
+    addMovie(movieItem: any){
+        return this.http.post(this.baseURIDB+'/movie',  movieItem, { observe: 'response' });
+    }
 }

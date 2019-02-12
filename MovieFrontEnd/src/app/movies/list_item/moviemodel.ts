@@ -5,5 +5,5 @@ export interface MovieModel{
     "releaseDate": string,
     "rating": number,
     "userid": number,
-    "list_name": string
+    "ListName": string
 }
