@@ -44,7 +44,7 @@ export { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, Ma
     MatListModule,
     PortalModule,
     MatExpansionModule,
-    FormsModule 
+    FormsModule
     ],
   providers: [UserService, LoginService, ListService, MovieService],
   bootstrap: [AppComponent]

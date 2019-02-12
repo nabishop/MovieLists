@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
 
   getListsOfUser() {
     this.listsSubscription = this.listService.getLists(this.loginService.user.id).subscribe(resp => {
-      console.log('stat is ' + resp.status);
+      console.log('stat is in getlist ' + resp.status);
 
       // user is found in db
       if (resp.status.toString() == '200') {

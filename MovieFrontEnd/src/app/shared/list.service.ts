@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient, HttpResponse } from "@angular/common/http"
+import { HttpClient, HttpResponse, HttpClientModule } from "@angular/common/http"
 import { UserResponse } from './userResponse';
 
 @Injectable({
@@ -26,9 +26,13 @@ export class ListService {
     }
 
     addList(id: number, name: string) {
+        var curDate = new Date();
+        var dateFormat = require('dateformat');
+        dateFormat(curDate, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+
         var newList = {
             "name": name,
-            "dateAdded": Date.now().toString(),
+            "dateAdded": curDate,
             "movie_id": 0,
             "user_id": id
         }
