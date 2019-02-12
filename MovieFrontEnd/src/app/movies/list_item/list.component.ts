@@ -54,4 +54,10 @@ export class ListComponent implements OnInit {
     else if (one.dateAdded < two.dateAdded) return 1;
     return 0;
   }
+
+  editListName(oldname: string, newname: string) {
+    this.listService.renameList(this.loginService.user.id, oldname, newname).subscribe(resp => {
+      this.getListsOfUser();
+    });
+  }
 }

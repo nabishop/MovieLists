@@ -1,7 +1,14 @@
 <div class="list-group-item" *ngFor="let list of lists">
-    <h4 class="list-group-item-heading">
-        {{list.name}}
-    </h4>
+    <div class="row">
+        <h4 class="list-group-item-heading">
+            {{list.name}}
+        </h4>
+        <input type="text" #newname placeholder="Rename list to...">
+            <form>
+                <button class="btn btn-secondary" (click)="editListName(list.name, newname.value)" type="button">Rename</button>
+            </form>
+    </div>
+
     <h6>Created {{list.dateAdded}}</h6>
 
     <div class="col-lg-6">

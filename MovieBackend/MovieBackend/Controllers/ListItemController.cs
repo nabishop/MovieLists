@@ -49,7 +49,7 @@ namespace MovieBackend.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int userId, [FromBody]ChangeName changeName)
+        public void Put(int userId, ChangeName changeName)
         {
             context.putNewListName(userId, changeName);
         }

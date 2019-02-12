@@ -8,7 +8,6 @@ import { UserResponse } from './userResponse';
 })
 export class ListService {
     readonly baseURI = 'https://socreatemoviebackend.azurewebsites.net/api';
-    public lists = [];
 
     constructor(private fb: FormBuilder, private http: HttpClient) { }
 
@@ -22,7 +21,7 @@ export class ListService {
             "oldname": oldn,
             "newname": newn
         };
-        this.http.put(this.baseURI + '/list/' + id, change, { observe: 'response' });
+        return this.http.put(this.baseURI + '/list/' + id, change, { observe: 'response' });
     }
 
     addList(id: number, name: string) {

@@ -134,7 +134,8 @@ namespace MovieBackend.Contexts
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "UPDATE movielist SET list_name=@NewName WHERE user_id=@User AND name=@OldName";
+                Console.WriteLine("id is "+id +" old is "+change.OldName+"   "+change.NewName);
+                cmd.CommandText = "UPDATE movielist SET name=@NewName WHERE user_id=@User OR name=@OldName";
                 cmd.Parameters.AddWithValue("@NewName", change.NewName);
                 cmd.Parameters.AddWithValue("@User", id);
                 cmd.Parameters.AddWithValue("@OldName", change.OldName);
