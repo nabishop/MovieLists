@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ListItem } from './listitem';
 import { MovieModel } from './moviemodel';
 import { MovieService } from 'src/app/shared/movie.service';
+import { SearchdMovie } from './searchedmovie';
 
 @Component({
   selector: 'app-movies-listitem',
@@ -16,13 +17,16 @@ import { MovieService } from 'src/app/shared/movie.service';
 export class ListComponent implements OnInit {
   listsSubscription: Subscription;
   lists: ListItem[];
-  movies: MovieModel[];
+  searchedMovies: SearchdMovie[];
+  curSearch: string;
 
   constructor(private listService: ListService, private loginService: LoginService, private toastr: ToastrService, private movieService: MovieService) { }
 
   ngOnInit() {
     console.log(this.loginService.user);
     this.getListsOfUser();
+    this.curSearch = "";
+    this.searchedMovies = [];
   }
 
   getListsOfUser() {
@@ -69,9 +73,30 @@ export class ListComponent implements OnInit {
     });
   }
 
-  deleteMovie(id: number){
-    this.movieService.deleteMoviesWithId(id).subscribe(resp=>{
+  deleteMovie(id: number) {
+    this.movieService.deleteMoviesWithId(id).subscribe(resp => {
       this.getListsOfUser();
     })
+  }
+
+  searchOmdb($event) {
+    this.curSearch += $event.target.value;
+
+    if (this.curSearch.length >= 3) {
+      this.movieService.searchMovie(this.curSearch).subscribe(resp => {
+        console.log(resp);
+        let stringresp = JSON.stringify(resp);
+        console.log(stringresp);
+        let objresp = JSON.parse(stringresp);
+        console.log(objresp);
+
+        console.log(this.searchedMovies);
+
+        this.searchedMovies.push({
+          Title: objresp.Title,
+          Plot: objresp.Plot
+        });
+      });
+    }
   }
 }

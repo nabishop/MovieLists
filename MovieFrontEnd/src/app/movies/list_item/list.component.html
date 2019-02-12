@@ -1,47 +1,56 @@
 <div class="list-group-item" *ngFor="let list of lists">
     <div class="row">
-        <h4 class="list-group-item-heading">
-            {{list.name}}
-        </h4>
-        <input type="text" #newname placeholder="Rename list to...">
-        <form>
-            <button class="btn btn-secondary" (click)="editListName(list.name, newname.value)"
-                type="button">Rename</button>
-        </form>
-    </div>
-
-    <h6>Created {{list.dateAdded}}</h6>
-
-    <div class="col-lg-6">
-        <div class="input-group">
-            <input type="text" placeholder="Search for...">
+        <div class="row">
+            <h4 class="list-group-item-heading">
+                {{list.name}}
+            </h4>
+            <input type="text" #newname placeholder="Rename list to...">
             <form>
-                <button class="btn btn-secondary" type="button">Go!</button>
+                <button class="btn btn-secondary" (click)="editListName(list.name, newname.value)"
+                    type="button">Rename</button>
             </form>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <button class="btn btn-warning" type="button" (click)="deleteList(list.name)">Delete list</button>
-    </div>
 
-    <div class="list-group-item" *ngFor="let movie of list.lists">
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                {{movie.title}}
-            </mat-expansion-panel-header>
-            <mat-list-item>
-                <div class="row">
-                    <p>
-                        {{movie.releaseDate}}
-                    </p>
-                    <button class="btn btn-warning" type="button" (click)="deleteMovie(movie.id)">Delete movie</button>
-                </div>
-                <input type="checkbox" name="watched" value="watched_true">Watched<br>
-                <input type="number" name="rating">{{movie.rating}}<br>
+        <h6>Created {{list.dateAdded}}</h6>
+
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" (keydown)="searchOmdb($event)" placeholder="Search for...">
+                <form>
+                    <button class="btn btn-secondary" type="button">Go!</button>
+                </form>
+            </div>
+
+            <div *ngFor="let searchedMovie of searchedMovies">
+                <h4>{{searchedMovie.Title}}</h4>
                 <p>
-                    {{movie.description}}
+                    {{searchedMovie.Plot}}
                 </p>
-            </mat-list-item>
-        </mat-expansion-panel>
+            </div>
+            <button class="btn btn-warning" type="button" (click)="deleteList(list.name)">Delete list</button>
+
+        </div>
+
+        <div class="list-group-item" *ngFor="let movie of list.lists">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    {{movie.title}}
+                </mat-expansion-panel-header>
+                <mat-list-item>
+                    <div class="row">
+                        <p>
+                            {{movie.releaseDate}}
+                        </p>
+                        <button class="btn btn-warning" type="button" (click)="deleteMovie(movie.id)">Delete
+                            movie</button>
+                    </div>
+                    <input type="checkbox" name="watched" value="watched_true">Watched<br>
+                    <input type="number" name="rating">{{movie.rating}}<br>
+                    <p>
+                        {{movie.description}}
+                    </p>
+                </mat-list-item>
+            </mat-expansion-panel>
+        </div>
     </div>
 </div>
