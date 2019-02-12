@@ -19,6 +19,8 @@ import { ListComponent } from './movies/list_item/list.component';
 import { MovieItemComponent } from './movies/movie_item/movieitem.component';
 import { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelHeader, MatAccordion } from '@angular/material';
 import { PortalModule } from '@angular/cdk/portal';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+ 
 
 export { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle, MatExpansionPanelHeader, MatAccordion } from '@angular/material';
 
@@ -44,7 +46,8 @@ export { MatIconModule, MatListModule, MatExpansionModule, MatExpansionPanel, Ma
     MatListModule,
     PortalModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    NgbModule
     ],
   providers: [UserService, LoginService, ListService, MovieService],
   bootstrap: [AppComponent]

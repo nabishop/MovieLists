@@ -36,4 +36,8 @@ export class MovieService {
     addMovie(movieItem: any){
         return this.http.post(this.baseURIDB+'/movie',  movieItem, { observe: 'response' });
     }
+
+    editRating(name: string, rating: number){
+        return this.http.put(this.baseURIDB+'/movie/'+name, rating,  { observe: 'response' });
+    }
 }

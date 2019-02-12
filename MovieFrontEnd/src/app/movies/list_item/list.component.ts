@@ -8,6 +8,7 @@ import { ListItem } from './listitem';
 import { MovieModel } from './moviemodel';
 import { MovieService } from 'src/app/shared/movie.service';
 import { SearchdMovie } from './searchedmovie';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-movies-listitem',
@@ -18,6 +19,8 @@ export class ListComponent implements OnInit {
   listsSubscription: Subscription;
   lists: ListItem[];
   curSearch: string;
+  ctrl = new FormControl(null, Validators.required);
+  starSelected = 0;
 
   constructor(private listService: ListService, private loginService: LoginService, private toastr: ToastrService, private movieService: MovieService) { }
 
@@ -93,19 +96,22 @@ export class ListComponent implements OnInit {
         list.searchlist = [{
           Title: objresp.Title,
           Plot: objresp.Plot,
-          Released: objresp.Released
+          Released: objresp.Released,
+          Rating: 0
         }];
       });
     }
   }
 
   addSearchedMovie(list: ListItem) {
+    this.curSearch = "";
+
     if (list.searchlist.length > 0) {
       let tempMovie = {
         Title: list.searchlist[0].Title,
         Description: list.searchlist[0].Plot,
         ReleaseDate: list.searchlist[0].Released,
-        Rating: -1,
+        Rating: 0,
         UserID: this.loginService.user.id,
         ListName: list.name
       };
@@ -117,5 +123,11 @@ export class ListComponent implements OnInit {
     else {
       this.toastr.info('Type in a search first!', 'Add new movie incomplete.');
     }
+  }
+
+  updateRating(title: string) {
+    this.movieService.editRating(title, this.starSelected).subscribe(resp => {
+      this.getListsOfUser();
+    });
   }
 }

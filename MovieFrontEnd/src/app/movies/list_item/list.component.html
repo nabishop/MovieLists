@@ -17,7 +17,7 @@
             <div class="input-group">
                 <input type="text" (keydown)="searchOmdb($event, list)" placeholder="Search for...">
                 <form>
-                    <button class="btn btn-secondary" type="button" (click)="addSearchedMovie(list)">Go!</button>
+                    <button class="btn btn-secondary" type="button" (click)="addSearchedMovie(list)">Add movie</button>
                 </form>
             </div>
 
@@ -27,30 +27,32 @@
                     {{searchedMovie.Plot}}
                 </p>
             </div>
-            <button class="btn btn-warning" type="button" (click)="deleteList(list.name)">Delete list</button>
-
         </div>
+        <button class="btn btn-warning" type="button" (click)="deleteList(list.name)">Delete list</button>
 
-        <div class="list-group-item" *ngFor="let movie of list.movielist">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    {{movie.title}}
-                </mat-expansion-panel-header>
-                <mat-list-item>
-                    <div class="row">
+        <div class="col-lg-12">
+            <div class="list-group-item" *ngFor="let movie of list.movielist">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <h6>{{movie.title}}</h6>
+                    </mat-expansion-panel-header>
+                    <mat-list-item>
+                        <div class="row">
+                            <p>
+                                Release Date: {{movie.releaseDate}}
+                            </p>
+                        </div>
+                        <h6>My rating</h6>
+                        <ngb-rating [(rate)]="starSelected" [readonly]="readonly" (click)="updateRating(movie.title)"></ngb-rating>
+                        <h6>Description</h6>
                         <p>
-                            {{movie.releaseDate}}
+                            {{movie.description}}
                         </p>
-                        <button class="btn btn-warning" type="button" (click)="deleteMovie(movie.id)">Delete
-                            movie</button>
-                    </div>
-                    <input type="checkbox" name="watched" value="watched_true">Watched<br>
-                    <input type="number" name="rating">{{movie.rating}}<br>
-                    <p>
-                        {{movie.description}}
-                    </p>
-                </mat-list-item>
-            </mat-expansion-panel>
+                        <p><button class="btn btn-warning" type="button" (click)="deleteMovie(movie.id)">Delete
+                                movie</button></p>
+                    </mat-list-item>
+                </mat-expansion-panel>
+            </div>
         </div>
     </div>
 </div>

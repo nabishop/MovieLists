@@ -124,7 +124,7 @@ namespace MovieBackend.Contexts
 
 
         // update movie rating (PUT)
-        public void UpdateMovieRating(int id, float rating)
+        public void UpdateMovieRating(string moviename, float rating)
         {
             using (MySqlConnection conn = GetConnection())
             {
@@ -134,8 +134,9 @@ namespace MovieBackend.Contexts
                 cmd.Connection = conn;
 
                 // change rating
-                cmd.CommandText = "UPDATE movie SET rating=@NewRating WHERE movie_id=" + id;
+                cmd.CommandText = "UPDATE movie SET rating=@NewRating WHERE title=@Title";
                 cmd.Parameters.AddWithValue("@NewRating", rating);
+                cmd.Parameters.AddWithValue("@Title", moviename);
                 cmd.ExecuteNonQuery();
 
                 if (conn != null)
