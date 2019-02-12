@@ -63,9 +63,15 @@ export class ListComponent implements OnInit {
 
   editListName(oldname: string, newname: string) {
     this.listService.renameList(this.loginService.user.id, oldname, newname).subscribe(resp => {
-      this.movieService.renameList(oldname, newname).subscribe(resp => {
+      this.movieService.renameMovieWithList(oldname, newname).subscribe(resp => {
         this.getListsOfUser();
       });
     });
+  }
+
+  deleteMovie(id: number){
+    this.movieService.deleteMoviesWithId(id).subscribe(resp=>{
+      this.getListsOfUser();
+    })
   }
 }

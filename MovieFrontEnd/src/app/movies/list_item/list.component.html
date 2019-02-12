@@ -30,9 +30,12 @@
                 {{movie.title}}
             </mat-expansion-panel-header>
             <mat-list-item>
-                <p>
-                    {{movie.releaseDate}}
-                </p>
+                <div class="row">
+                    <p>
+                        {{movie.releaseDate}}
+                    </p>
+                    <button class="btn btn-warning" type="button" (click)="deleteMovie(movie.id)">Delete movie</button>
+                </div>
                 <input type="checkbox" name="watched" value="watched_true">Watched<br>
                 <input type="number" name="rating">{{movie.rating}}<br>
                 <p>

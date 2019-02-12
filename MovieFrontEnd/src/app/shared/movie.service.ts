@@ -24,7 +24,11 @@ export class MovieService {
         return this.http.get<MovieModel[]>(this.baseURIDB+'/movie/'+listname,  { observe: 'response' })
     }
 
-    renameList(oldname: string, newname: string){
+    renameMovieWithList(oldname: string, newname: string){
         return this.http.put(this.baseURIDB+'/movie/'+oldname+'/'+newname,  { observe: 'response' })
+    }
+
+    deleteMoviesWithId(id: number){
+        return this.http.delete(this.baseURIDB+'/movie/'+id,  { observe: 'response' })
     }
 }
