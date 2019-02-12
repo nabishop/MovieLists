@@ -15,13 +15,13 @@
 
         <div class="col-lg-6">
             <div class="input-group">
-                <input type="text" (keydown)="searchOmdb($event)" placeholder="Search for...">
+                <input type="text" (keydown)="searchOmdb($event, list)" placeholder="Search for...">
                 <form>
                     <button class="btn btn-secondary" type="button">Go!</button>
                 </form>
             </div>
 
-            <div *ngFor="let searchedMovie of searchedMovies">
+            <div *ngFor="let searchedMovie of list.searchlist">
                 <h4>{{searchedMovie.Title}}</h4>
                 <p>
                     {{searchedMovie.Plot}}
@@ -31,7 +31,7 @@
 
         </div>
 
-        <div class="list-group-item" *ngFor="let movie of list.lists">
+        <div class="list-group-item" *ngFor="let movie of list.movielist">
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     {{movie.title}}

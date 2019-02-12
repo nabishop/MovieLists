@@ -17,7 +17,6 @@ import { SearchdMovie } from './searchedmovie';
 export class ListComponent implements OnInit {
   listsSubscription: Subscription;
   lists: ListItem[];
-  searchedMovies: SearchdMovie[];
   curSearch: string;
 
   constructor(private listService: ListService, private loginService: LoginService, private toastr: ToastrService, private movieService: MovieService) { }
@@ -26,7 +25,7 @@ export class ListComponent implements OnInit {
     console.log(this.loginService.user);
     this.getListsOfUser();
     this.curSearch = "";
-    this.searchedMovies = [];
+    this.lists = [];
   }
 
   getListsOfUser() {
@@ -41,7 +40,7 @@ export class ListComponent implements OnInit {
 
         for (let list of this.lists) {
           this.movieService.getMoviesForList(list.name).subscribe(resp => {
-            list.lists = resp.body;
+            list.movielist = resp.body;
           });
         }
       }
@@ -79,8 +78,9 @@ export class ListComponent implements OnInit {
     })
   }
 
-  searchOmdb($event) {
-    this.curSearch += $event.target.value;
+  searchOmdb($event, list: ListItem) {
+    this.curSearch = $event.target.value;
+    console.log(this.curSearch);
 
     if (this.curSearch.length >= 3) {
       this.movieService.searchMovie(this.curSearch).subscribe(resp => {
@@ -90,12 +90,10 @@ export class ListComponent implements OnInit {
         let objresp = JSON.parse(stringresp);
         console.log(objresp);
 
-        console.log(this.searchedMovies);
-
-        this.searchedMovies.push({
+        list.searchlist = [{
           Title: objresp.Title,
           Plot: objresp.Plot
-        });
+        }];
       });
     }
   }
