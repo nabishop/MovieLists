@@ -13,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-movies-listitem',
   templateUrl: './list.component.html',
-  styles: []
+  styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
   listsSubscription: Subscription;

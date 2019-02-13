@@ -1,0 +1,15 @@
+.no_padding_container{
+    padding: 0 !important;
+}
+
+.darker_color{
+    background: #80deea;
+}
+
+.fixed_logout{
+    position: absolute; 
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    text-align: center;
+}

@@ -4,3 +4,8 @@
     color: #fff !important;
     padding: 5px !important;
 }
+
+.list_forms{
+    display: flex;
+    align-items: center;
+}

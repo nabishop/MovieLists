@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <div class="col-md-12">
+<div class="container-fluid no_padding_container">
+    <div class="col-md-12 no_padding_container">
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4">Movie Lists</h1>
@@ -7,11 +7,11 @@
             </div>
         </div>
         <div class="list-group">
-            <div class="row">
-                <div class="list-group-item">
+            <div class="row darker_color">
+                <div class="list-group-item col-lg-2">
                     My Lists
                 </div>
-                <div class="input-group">
+                <div class="input-group col-lg-4">
                     <input type="text" #newname placeholder="New List Name">
                     <form>
                         <button class="btn btn-secondary" type="button" (click)="onAddList(newname.value)">Add
@@ -19,8 +19,10 @@
                     </form>
                 </div>
                 <app-movies-listitem a="b"></app-movies-listitem>
-                <a href="" class="list-group-item list-group-item-action active justify-content-between">Log
-                    Out</a>
+                <div class="row">
+                    <a href="" class="list-group-item list-group-item-action active justify-content-between fixed_logout">Log
+                        Out</a>    
+                </div>
             </div>
         </div>
     </div>

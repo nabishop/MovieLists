@@ -10,7 +10,7 @@ import { ListComponent } from './list_item/list.component';
 @Component({
     selector: 'app-movies',
     templateUrl: './movies.component.html',
-    styles: []
+    styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
     playlists = [];
